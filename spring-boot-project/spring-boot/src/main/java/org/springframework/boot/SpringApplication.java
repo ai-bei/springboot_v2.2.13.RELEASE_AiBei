@@ -326,11 +326,15 @@ public class SpringApplication {
 			// 打印banner
 			Banner printedBanner = printBanner(environment);
 			// 【*核心方法3*】初始化应用上下文
+			// ConfigurableApplicationContext是 ApplicationContext 接口的子接口。在ApplicationContext基础上增加了配置上下文的工具。
+			// ConfigurableApplicationContext是容器的高级接口
+			// 创建完成的上下文环境的同时也创建了IOC的容器。
 			context = createApplicationContext();
 			// 实例化Collection<SpringBootExceptionReporter> , 用来支持报告关于启动失败的错误
 			exceptionReporters = getSpringFactoriesInstances(SpringBootExceptionReporter.class,
 					new Class[] { ConfigurableApplicationContext.class }, context);
 			// 【*核心方法4*】刷新应用上下文前的准备阶段
+			//  主要就是对context进行属性设
 			prepareContext(context, environment, listeners, applicationArguments, printedBanner);
 			// 【*核心方法5*】刷新应用上下文
 			refreshContext(context);
@@ -362,14 +366,14 @@ public class SpringApplication {
 	private ConfigurableEnvironment prepareEnvironment(SpringApplicationRunListeners listeners,
 			ApplicationArguments applicationArguments) {
 		// Create and configure the environment
-		//创建并配置相应的环境
+		// 创建并配置相应的环境
 		ConfigurableEnvironment environment = getOrCreateEnvironment();
-		//根据用户配置文件来配置environment系统环境。
+		// 根据用户配置文件来配置environment系统环境。
 		configureEnvironment(environment, applicationArguments.getSourceArgs());
 		ConfigurationPropertySources.attach(environment);
-		//启动相应的监听器，其中一个重要的监听器是ConfigFileApplicationListener，用于加载项目的配置文件。
+		// 启动相应的监听器，其中一个重要的监听器是ConfigFileApplicationListener，用于加载项目的配置文件。
 		listeners.environmentPrepared(environment);
-		//将 environment 对象绑定到当前的 SpringApplication 上下文中，这样后续的配置文件加载和属性绑定等操作都可以使用这个环境对象。
+		// 将 environment 对象绑定到当前的 SpringApplication 上下文中，这样后续的配置文件加载和属性绑定等操作都可以使用这个环境对象。
 		bindToSpringApplication(environment);
 		if (!this.isCustomEnvironment) {
 			environment = new EnvironmentConverter(getClassLoader()).convertEnvironmentIfNecessary(environment,

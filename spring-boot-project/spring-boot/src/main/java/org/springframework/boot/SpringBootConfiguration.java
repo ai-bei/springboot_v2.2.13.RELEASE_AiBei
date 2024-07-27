@@ -68,7 +68,7 @@ public @interface SpringBootConfiguration {
 	 * @return whether to proxy {@code @Bean} methods
 	 * @since 2.2
 	 */
-	/*指定别名的注解类型*/
+	/* 指定别名的注解类型 */
 	@AliasFor(annotation = Configuration.class)
 	boolean proxyBeanMethods() default true;
 

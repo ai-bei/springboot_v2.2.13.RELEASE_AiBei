@@ -107,7 +107,7 @@ public class AutoConfigurationImportSelector implements DeferredImportSelector, 
 	 * @return 应当被导入的自动配置项
 	 */
 	protected AutoConfigurationEntry getAutoConfigurationEntry(AutoConfigurationMetadata autoConfigurationMetadata,
-															   AnnotationMetadata annotationMetadata) {
+			AnnotationMetadata annotationMetadata) {
 		// 检查是否启用了自动配置,是否有spring.boot.enableautoconfiguration属性,默认返回true
 		if (!isEnabled(annotationMetadata)) {
 			return EMPTY_ENTRY;
@@ -139,7 +139,6 @@ public class AutoConfigurationImportSelector implements DeferredImportSelector, 
 		// 返回自动配置项
 		return new AutoConfigurationEntry(configurations, exclusions);
 	}
-
 
 	@Override
 	public Class<? extends Group> getImportGroup() {
@@ -265,15 +264,18 @@ public class AutoConfigurationImportSelector implements DeferredImportSelector, 
 		String[] candidates = StringUtils.toStringArray(configurations);
 		// 定义一个 skip 数组，是否需要跳过，这个skip的数组与candidates的数组长度保持一致。
 		boolean[] skip = new boolean[candidates.length];
-		// getAutoConfigurationImportFilters : 这个方法会拿到 OnBeanCondition , OnClassCondition, OnWebApplicationCondition
+		// getAutoConfigurationImportFilters : 这个方法会拿到 OnBeanCondition , OnClassCondition,
+		// OnWebApplicationCondition
 		// 然后遍历这三个条件类去过滤从spring.factories 中加载的大量配置类。
 		boolean skipped = false;
 		for (AutoConfigurationImportFilter filter : getAutoConfigurationImportFilters()) {
 			// 调用各种aware的方法，将beanClassLoader，beanFactory 等注入到filter中
-			// 这里的filter的对象就是：OnBeanCondition || OnClassCondition || OnWebApplicationCondition
+			// 这里的filter的对象就是：OnBeanCondition || OnClassCondition ||
+			// OnWebApplicationCondition
 			invokeAwareMethods(filter);
 			// 通过各种filter来判断candidates
-			// 这里主要是想通过candidates的自动配置类，拿到标注的 @ConditionalOnClass ,@ConditionalOnBean, @ConditionalOnWebApplication 上面的注解值是否匹配。
+			// 这里主要是想通过candidates的自动配置类，拿到标注的 @ConditionalOnClass ,@ConditionalOnBean,
+			// @ConditionalOnWebApplication 上面的注解值是否匹配。
 			// 这里需要注意 candidates 数组 与 skip 数组是[一一对应]
 			boolean[] match = filter.match(candidates, autoConfigurationMetadata);
 			//
@@ -430,10 +432,9 @@ public class AutoConfigurationImportSelector implements DeferredImportSelector, 
 		 * 处理自动配置类的过程，过滤掉不符合匹配条件的自动配置类。
 		 * 该方法会调用{@link AutoConfigurationImportSelector}的{@code getAutoConfigurationEntry}方法，
 		 * 以获取自动配置类的信息，并将其存储起来。
-		 *
 		 * @param annotationMetadata 注解元数据，包含当前环境的元数据信息。
 		 * @param deferredImportSelector 延迟导入选择器，用于获取自动配置类的信息。
-		 *                                必须是{@link AutoConfigurationImportSelector}的实现类。
+		 * 必须是{@link AutoConfigurationImportSelector}的实现类。
 		 */
 		@Override
 		public void process(AnnotationMetadata annotationMetadata, DeferredImportSelector deferredImportSelector) {
