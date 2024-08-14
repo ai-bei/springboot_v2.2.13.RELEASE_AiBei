@@ -46,15 +46,15 @@ import org.springframework.data.repository.Repository;
  * @since 1.2.0
  */
 
-/*下面4个注解是元注解*/
-@Target(ElementType.TYPE) /*注解的使用范围，Type表示注解可以描述在：类，接口，注解或者枚举中*/
-@Retention(RetentionPolicy.RUNTIME)/*表示注解的生命周期，runtime运行时*/
-@Documented/*表示注解可以记录在javadoc中*/
-@Inherited/*表示可以被子类继承该注解*/
-/*下面3个是Springboot的注解*/
-@SpringBootConfiguration/*标明这个类是配置类*/
-@EnableAutoConfiguration/*启动自动配置功能*/
-/*注解扫描*/
+/* 下面4个注解是元注解 */
+@Target(ElementType.TYPE) /* 注解的使用范围，Type表示注解可以描述在：类，接口，注解或者枚举中 */
+@Retention(RetentionPolicy.RUNTIME) /* 表示注解的生命周期，runtime运行时 */
+@Documented /* 表示注解可以记录在javadoc中 */
+@Inherited /* 表示可以被子类继承该注解 */
+/* 下面3个是Springboot的注解 */
+@SpringBootConfiguration /* 标明这个类是配置类 */
+@EnableAutoConfiguration /* 启动自动配置功能 */
+/* 注解扫描 */
 @ComponentScan(excludeFilters = { @Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
 		@Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })
 public @interface SpringBootApplication {
@@ -63,7 +63,7 @@ public @interface SpringBootApplication {
 	 * Exclude specific auto-configuration classes such that they will never be applied.
 	 * @return the classes to exclude
 	 */
-	/*根据class来排除特定的类，使其不能加入Spring容器，传入参数value类型是class的类型*/
+	/* 根据class来排除特定的类，使其不能加入Spring容器，传入参数value类型是class的类型 */
 	@AliasFor(annotation = EnableAutoConfiguration.class)
 	Class<?>[] exclude() default {};
 
@@ -73,7 +73,7 @@ public @interface SpringBootApplication {
 	 * @return the class names to exclude
 	 * @since 1.3.0
 	 */
-	/*排除特定的自动配置类名，这样它们就永远不会被应用。*/
+	/* 排除特定的自动配置类名，这样它们就永远不会被应用。 */
 	@AliasFor(annotation = EnableAutoConfiguration.class)
 	String[] excludeName() default {};
 
@@ -89,7 +89,7 @@ public @interface SpringBootApplication {
 	 * @return base packages to scan
 	 * @since 1.3.0
 	 */
-	/*要扫描带注释组件的基本包。使用scanBasePackageClasses作为基于字符串的包名称的类型安全替代方案。*/
+	/* 要扫描带注释组件的基本包。使用scanBasePackageClasses作为基于字符串的包名称的类型安全替代方案。 */
 	@AliasFor(annotation = ComponentScan.class, attribute = "basePackages")
 	String[] scanBasePackages() default {};
 
@@ -109,9 +109,9 @@ public @interface SpringBootApplication {
 	 * @since 1.3.0
 	 */
 	/*
-	 scanBasePackages的安全替代方案，以指定要扫描带注释的组件。将扫描指定的每个类别的包。
-     考虑在每个包中创建一个特殊的无操作标记类或接口,除了被该属性引用之外，没有其他用途。
-      */
+	 * scanBasePackages的安全替代方案，以指定要扫描带注释的组件。将扫描指定的每个类别的包。
+	 * 考虑在每个包中创建一个特殊的无操作标记类或接口,除了被该属性引用之外，没有其他用途。
+	 */
 	@AliasFor(annotation = ComponentScan.class, attribute = "basePackageClasses")
 	Class<?>[] scanBasePackageClasses() default {};
 
@@ -137,7 +137,7 @@ public @interface SpringBootApplication {
 	 * @since 2.2
 	 * @return whether to proxy {@code @Bean} methods
 	 */
-	/*指定是否应代理@Bean方法以强制执行bean生命周期行为*/
+	/* 指定是否应代理@Bean方法以强制执行bean生命周期行为 */
 	@AliasFor(annotation = Configuration.class)
 	boolean proxyBeanMethods() default true;
 

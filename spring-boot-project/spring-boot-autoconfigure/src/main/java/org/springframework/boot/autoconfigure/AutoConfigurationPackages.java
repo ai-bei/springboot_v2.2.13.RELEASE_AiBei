@@ -90,7 +90,8 @@ public abstract class AutoConfigurationPackages {
 	 * @param packageNames the package names to set
 	 */
 	public static void register(BeanDefinitionRegistry registry, String... packageNames) {
-		// 这里的参数 packageNames 缺省的情况下，就是一个字符串，是使用了注解 @SpringBootApplication 的Spring boot 应用程序入口类所在的包。
+		// 这里的参数 packageNames 缺省的情况下，就是一个字符串，是使用了注解 @SpringBootApplication 的Spring boot
+		// 应用程序入口类所在的包。
 		if (registry.containsBeanDefinition(BEAN)) {
 			/* 如果该bean已经注册，则将要注册包名称添加到注册中心 */
 			BeanDefinition beanDefinition = registry.getBeanDefinition(BEAN);
@@ -98,7 +99,7 @@ public abstract class AutoConfigurationPackages {
 			constructorArguments.addIndexedArgumentValue(0, addBasePackages(constructorArguments, packageNames));
 		}
 		else {
-			/*如果bean没有注册，则注册这个bean，参数中提供的包名称会被设置到bean定义中去*/
+			/* 如果bean没有注册，则注册这个bean，参数中提供的包名称会被设置到bean定义中去 */
 			GenericBeanDefinition beanDefinition = new GenericBeanDefinition();
 			beanDefinition.setBeanClass(BasePackages.class);
 			beanDefinition.getConstructorArgumentValues().addIndexedArgumentValue(0, packageNames);
@@ -124,7 +125,7 @@ public abstract class AutoConfigurationPackages {
 
 		@Override
 		public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry) {
-			/* 将注解标注的元信息传入，获取到相应的包名*/
+			/* 将注解标注的元信息传入，获取到相应的包名 */
 			register(registry, new PackageImport(metadata).getPackageName());
 		}
 

@@ -81,7 +81,7 @@ import org.springframework.core.io.support.SpringFactoriesLoader;
 @Inherited
 /* 自动配置包 */
 @AutoConfigurationPackage
-/* Spring的底层注解@Import ,给容器中导入一个组件。导入的组件是 AutoConfigurationImportSelector*/
+/* Spring的底层注解@Import ,给容器中导入一个组件。导入的组件是 AutoConfigurationImportSelector */
 @Import(AutoConfigurationImportSelector.class)
 public @interface EnableAutoConfiguration {
 
@@ -95,7 +95,7 @@ public @interface EnableAutoConfiguration {
 	 * Exclude specific auto-configuration classes such that they will never be applied.
 	 * @return the classes to exclude
 	 */
-	/*不会被导入spring容器的类*/
+	/* 不会被导入spring容器的类 */
 	Class<?>[] exclude() default {};
 
 	/**
@@ -104,7 +104,7 @@ public @interface EnableAutoConfiguration {
 	 * @return the class names to exclude
 	 * @since 1.3.0
 	 */
-	/*不会被导入spring容器的类名称*/
+	/* 不会被导入spring容器的类名称 */
 	String[] excludeName() default {};
 
 }
