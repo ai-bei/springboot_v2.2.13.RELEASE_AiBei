@@ -1,5 +1,7 @@
 package com.aibei.springboot.test.controller;
 
+import com.aibei.springboot.config.MyAppProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,8 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
+	@Autowired
+	MyAppProperties myAppProperties;
+
 	@GetMapping("/test")
 	public String test(){
+		System.out.println(myAppProperties);
 		return "Success";
 	}
 }
